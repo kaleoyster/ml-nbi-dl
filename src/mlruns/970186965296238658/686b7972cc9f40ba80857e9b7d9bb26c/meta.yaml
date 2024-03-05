@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/kale/Documents/programs/nbi-projects/ml-nbi-dl/src/mlruns/970186965296238658/686b7972cc9f40ba80857e9b7d9bb26c/artifacts
+end_time: 1708977552519
+entry_point_name: ''
+experiment_id: '970186965296238658'
+lifecycle_stage: active
+run_id: 686b7972cc9f40ba80857e9b7d9bb26c
+run_name: deep-learning-nbi- smote-0-0.1
+run_uuid: 686b7972cc9f40ba80857e9b7d9bb26c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708975159559
+status: 3
+tags: []
+user_id: kale

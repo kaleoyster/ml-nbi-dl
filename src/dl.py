@@ -171,17 +171,8 @@ def main():
         mlflow.log_metric("f1_score", mean_f1)
         mlflow.log_metric("kappa", mean_kappa)
         
-        # Compute SHAP values using a subset of the test data for efficiency
-        #X_train_new = pd.DataFrame(X_train, columns=cols)
-        #X_test_new = pd.DataFrame(X_test, columns=cols)
-
         ## Compute SHAP Values
         X_train = X_train.astype('float32')
-
-        #explainer = shap.Explainer(model, bridge_X[:10])
-        #shap_values = explainer(bridge_X[:10])
-        #mean_shap = np.mean(abs(shap_values.values), axis=0).mean(1)
-        #mean_shap_features = {column:shap_v for column, shap_v in zip(cols, mean_shap)}
 
         explainer = shap.DeepExplainer(model, X_train[:100])
         shap_values = explainer.shap_values(X_train[:10])
@@ -196,27 +187,6 @@ def main():
         shap.summary_plot(shap_values, X_train[:10], show=False)
         plt.savefig('shap_summary_plot.png')
         mlflow.log_artifact('shap_summary_plot.png', 'shap_plots')
-
-    # Log metrics with MLflow
-    #y_test_new, y_pred_new = class_set
-    #tp, tn, fn, fp = get_classification_samples(X_test, y_test_new, y_pred_new, cols, model_name)
-    #tp.to_csv("true_positives.csv", index=False)
-    #tn.to_csv("true_negatives.csv", index=False)
-    #fn.to_csv("false_negatives.csv", index=False)
-    #fp.to_csv("false_positives.csv", index=False)
-
-    # List artifacts
-    #client = MlflowClient()
-    #artifact_path = "model_explanations_shap"
-    #artifacts = [x.path for x in client.list_artifacts(run.info.run_id, artifact_path)]
-    #
-    #print("# artifacts:")
-    #print(artifacts)
-    #
-    ### load back the logged explanation
-    #dst_path = download_artifacts(run_id=run.info.run_id, artifact_path=artifact_path)
-    #base_values = np.load(os.path.join(dst_path, "base_values.npy"))
-    #shap_values = np.load(os.path.join(dst_path, "shap_values.npy"))
 
 if __name__=='__main__':
     main()
